@@ -1,0 +1,148 @@
+#!/usr/bin/env sh
+
+# Just for coloring
+
+##=======================================arch/artix repo
+##--------------------------- Kernel & driver
+linux-firmware
+
+#linux
+#broadcom-wl
+
+linux-zen
+linux-zen-headers
+broadcom-wl-dkms
+
+intel-ucode
+
+##--------------------------- Base & Base-devel
+base
+binutils
+bison
+fakeroot
+gcc
+m4
+make
+patch
+pkgconf
+##------------------
+#sudo
+opendoas
+
+##--------------------------- shell
+fish
+
+##--------------------------- xorg
+xf86-video-intel
+
+xorg-server
+xorg-xinit
+
+#xorg-xbacklight
+xorg-xev
+xorg-xkill
+xorg-xprop
+xorg-xrandr
+#xorg-xrdb
+xorg-xset	#d picom
+xorg-xsetroot
+
+##--------------------------- WM/DE
+spectrwm-git
+
+##--------------------------- app
+#android-sdk-platform-tools
+#android-tools
+#awesome-terminal-fonts #d lsd
+#dmenu
+feh
+fftw	#d picom cava
+file-roller
+firefox
+git
+grub
+gucharmap
+htop
+imagemagick
+iniparser #d cava
+#j4-dmenu-desktop
+lsb-release #d fetch
+maim
+man-db
+#meld
+mtpfs
+neovim
+noto-fonts
+ntp
+os-prober
+#otf-font-awesome
+p7zip
+picom
+mate-polkit
+#polybar
+portaudio	 #d mpd cava
+ps_mem
+#qt5-styleplugins
+reflector
+rofi
+slop
+#scrot
+stow
+#telegram-desktop
+ttf-droid #cjk
+unclutter
+unrar
+unzip
+wget
+xclip
+xdo
+xdotool
+xtrlock
+
+##------------------------ runit-app
+#alsa-utils-runit
+#cups-runit
+dhcpcd-runit
+iwd-runit
+#ntp-runit
+rsm
+
+##------------------------ audio/video
+#alsa-plugins
+alsa-utils
+#pavucontrol
+#pulseaudio-alsa #d cava
+mpc
+mpd
+ncmpcpp
+
+mpv
+
+##------------------------ filemanager
+thunar
+ffmpegthumbnailer
+gvfs-mtp
+ntfs-3g
+thunar-archive-plugin
+thunar-media-tags-plugin
+tumbler
+
+##------------------------ printer
+cups
+ghostscript
+gutenprint
+system-config-printer
+
+
+##============================================ AUR repo
+#brave-bin
+#gotop-bin
+#icons-in-terminal
+lsd-bin
+kotatogram-desktop-bin
+nerd-fonts-jetbrains-mono
+#networkmanager-dispatcher-ntpd
+#sublime-text-dev
+paru-bin
+ttf-menlo-powerline-git
+#ventoy-bin

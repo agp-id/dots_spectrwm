@@ -1,0 +1,65 @@
+#!/usr/bin/env sh
+
+# Thanks to:
+# Allah SWT
+# https://bandithijo.github.io
+
+# Edited by :	Agp https://github.com/agp-id
+
+timeStamp="$(date '+%y%m%d-%H%M-%S')"
+screenShotDir="$HOME/picture/screenshot"
+fileName="$screenShotDir/Screenshot_$timeStamp.png"
+
+# Check dir
+[ ! -d "$screenShotDir" ] && mkdir -pv "$screenShotDir"
+
+### Decor (imagemagic) -----------------------------------------------------
+color_profile='/usr/share/color/icc/colord/sRGB.icc'
+border_size='0'
+background_color='#ffffff' # 'none' for transparent; Hex color use '"#-000001"'
+background_size='10'
+shadow_size='49x10+0+10'
+font='MesloLGS-NF'
+font_size='10'
+color_fg='#ffffff'
+color_bg='#666665'
+author_position1='SouthWest'
+author_position2='+30+26'
+author="\ by: @$USER ($(date '+%Y-%m-%d %H:%M:%S %Z'))"
+
+saveAndCopy (){
+
+	magick convert $fileName -bordercolor $color_bg -border $border_size $fileName
+
+	magick convert $fileName \( +clone -background black \
+	-shadow $shadow_size \) +swap -background none \
+	-layers merge +repage $fileName
+
+	magick convert $fileName -bordercolor $background_color \
+	-border $background_size $fileName
+
+	magick convert $fileName \
+	-gravity $author_position1 -pointsize $font_size -fill $color_fg \
+	-undercolor $color_bg -font $font \
+	-annotate $author_position2 "$author" $fileName
+
+	magick convert $fileName -gravity South -chop 0x$((background_size/2)) \
+	$fileName
+
+	magick convert $fileName -gravity North -background $background_color \
+		-splice 0x$((background_size/2)) $fileName
+
+	magick convert $fileName -profile $color_profile $fileName
+
+#copy to clip
+	xclip -selection clipboard -i $fileName -t image/png
+}
+#----------------------------------------------------------------------------
+
+case "$(printf "Selected area\\nCurrent window\\nFull screen" \
+	| rofi -dmenu "Screenshot & copy")" in
+		"Selected area") maim -d 1 -s "$fileName" && saveAndCopy ;;
+		"Current window") maim -d 1 -i "$(xdotool getactivewindow)" -B "$fileName" \
+			&& saveAndCopy ;;
+		"Full screen") maim -d 1 "$fileName" && saveAndCopy ;;
+esac

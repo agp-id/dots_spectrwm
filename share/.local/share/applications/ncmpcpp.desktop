@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Musik Player
+Exec=musik-mpd
+Icon=cantata
+Terminal=false

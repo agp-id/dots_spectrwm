@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+[[ ! -d ~/.ssh ]] &&
+  mkdir ~/.ssh
+cd ~/.ssh
+
+echo "Create SSH keys"
+ssh-keygen -t rsa -C "agp2nd@gmail.com"
+
+[[ ! -f ~/.ssh/id_rsa.pub ]] && {
+  echo "~/.ssh/id_rsa.pub not found"
+  exit }
+
+echo "id_rsa.pub code:"
+cat ~/.ssh/id_rsa.pub
+
+echo -e "\n\nTest on this device"
+ssh -t git@github.com
+

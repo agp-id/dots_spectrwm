@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+if
+   xdo id -N cava-drop > /dev/null
+ then
+   xdo kill -N cava-drop
+ else
+    st -C "black@256" -A 0 -c "cava-drop" -g 198x39+-9+180 cava || $TERM cava
+fi

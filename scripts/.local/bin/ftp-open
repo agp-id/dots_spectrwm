@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+if [[ $@ != "" ]]; then
+  thunar ftp://192.168.43.$@:2121/0536-1216
+else
+  echo
+  read -e -p "       $(tput bold)$(tput setaf 4)Insert $(tput setaf 2)ip$(tput setaf 2):port$(tput setaf 4) = $(tput sgr0)ftp://" -i "192.168.43." ip
+
+  echo $ip |grep ":[0-9]" >/dev/null &&
+    thunar ftp://$ip/0536-1216 ||
+    thunar ftp://$ip:2121/0536-1216
+fi

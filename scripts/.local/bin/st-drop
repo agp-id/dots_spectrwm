@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+
+if
+    xdo id -N st-drop > /dev/null
+then
+      if
+          [[ -n $(xprop -id $(xdo id -N st-drop) |grep 'window state: Iconic') ]]
+        then
+          xdotool set_desktop_for_window $(xdo id -N st-drop) $(xdotool get_desktop)
+          xdotool windowfocus $(xdo id -N st-drop)
+        elif
+          [[ -z $(xprop -id $(xdo id -N st-drop) |grep '_NET_WM_STATE') ]]
+        then
+          xdo show -N st-drop
+      else
+          xdo hide -N st-drop
+      fi
+else
+   st -c "st-drop" -A 0.97 -g 195x18+-3+-3
+fi

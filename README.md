@@ -1,0 +1,2 @@
+# spectrwm
+my spectrwm config

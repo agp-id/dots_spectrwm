@@ -1,0 +1,14 @@
+[output]
+ method = ncurses
+ 
+[color]
+
+ gradient = 1
+ gradient_count = 3
+ gradient_color_1 = '#0099ff'
+ gradient_color_2 = '#ff3399'
+
+[general]
+bar_width = 3
+sensitivity = 500
+mode = scientific

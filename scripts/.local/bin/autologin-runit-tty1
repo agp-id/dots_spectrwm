@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+command -v doas > /dev/null &&
+  su=doas ||
+  su=doas
+
+echo "========|Check runit-init..."
+  strings /sbin/init | grep runit > /dev/null || {
+    echo "---|No runit-init, Skip!"
+    return
+  }
+  echo
+  printf "======| Autologin in TTY1 ? [Y/n] "
+    read yn
+      case $yn in
+          * )
+            $su sed -i "s/GETTY_ARGS=\".*\$/GETTY_ARGS=\"--autologin $USER --noclear\"/g" /etc/runit/sv/agetty-tty1/conf
+            echo "---|Autologin active."
+            ;;
+          [nN]* )
+            $su sed -i "s/GETTY_ARGS=\".*\$/GETTY_ARGS=\"--noclear\"/g" /etc/runit/sv/agetty-tty1/conf
+            echo "---|Autologin inactive."
+            ;;
+      esac
+

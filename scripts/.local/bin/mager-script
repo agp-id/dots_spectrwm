@@ -1,0 +1,73 @@
+#!/usr/bin/env sh
+#Scripts-mager by Agp (http://github.com/agp-id)
+#Create on 2021-03-17
+#last edit 2021-04-13
+
+##Config/Variable
+#TERM=st
+#EDITOR=nvim
+
+_term="$TERMINAL"
+_listCmd="
+Auto-login runit(tty1)
+Dunst config
+Ftp open
+Mager script
+Time update
+Spectrwm autorun
+Spectrwm bar
+Spectrwm config
+.Xinitrc
+"
+
+case "$(echo "$_listCmd"   |rofi -dmenu -i -p "Mager")" in
+
+  "Auto-login"*)
+        $_term 'pkexec echo $blue"========|Check runit-init..."$normal
+        strings /sbin/init | grep runit > /dev/null || {
+          echo $red"---|No runit-init, Skip!"$normal
+          return
+        }
+        echo $yellow
+        printf "======| Autologin $blue$USER$yellow in$green TTY1$yellow ?$normal [Y/n] "
+          read yn
+            case $yn in
+                * )
+                  $su sed -i "s/GETTY_ARGS=\".*\$/GETTY_ARGS=\"--autologin $USER --noclear\"/g" /etc/runit/sv/agetty-tty1/conf
+                  echo $green"---|Autologin active."$normal
+                  ;;
+                [nN]* )
+                  $su sed -i "s/GETTY_ARGS=\".*\$/GETTY_ARGS=\"--noclear\"/g" /etc/runit/sv/agetty-tty1/conf
+                  echo $yellow"---|Autologin inactive."$normal
+                  ;;
+            esac'
+      ;;
+  "Dunst"*)
+      $_term $EDITOR $HOME/.config/dunst/dunstrc
+      ;;
+  "Ftp"*)
+      $_term -c "open-ftp" -g 60x3+470+22 ftp-open
+      ;;
+  "Mager"*)
+      $_term $EDITOR $HOME/.local/bin/mager-script
+      ;;
+  "Spectrwm a"*)
+      $_term $EDITOR $HOME/.config/spectrwm/autorun.sh
+      ;;
+  "Spectrwm b"*)
+      $_term $EDITOR $HOME/.config/spectrwm/baraction.sh
+      ;;
+  "Spectrwm c"*)
+      $_term $EDITOR $HOME/.config/spectrwm/spectrwm.conf
+      ;;
+  "Time"*)
+      pkexec time-update
+      ;;
+  ".Xprofile")
+      $_term $EDITOR $HOME/.xprofile
+      ;;
+  ".Xinitrc")
+      $_term $EDITOR $HOME/.xinitrc
+      ;;
+
+esac

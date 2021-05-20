@@ -1,0 +1,35 @@
+#!/usr/bin/env sh
+
+pkg="  virt-manager qemu qemu-arch-extra edk2-ovmf vde2 ebtables \
+       dnsmasq bridge-utils openbsd-netcat"
+runit="libvirt-runit"
+
+doas pacman -S --needed $pkg $runit
+
+for sv in libvirtd virtlogd; do
+  [[ ! -L /run/runit/service/$sv ]] &&
+    doas ln -s /etc/runit/sv/$sv /run/runit/service/
+done
+
+echo "<network>
+  <name>br10</name>
+  <forward mode='nat'>
+    <nat>
+      <port start='1024' end='65535'/>
+    </nat>
+  </forward>
+  <bridge name='br10' stp='on' delay='0'/>
+  <ip address='192.168.30.1' netmask='255.255.255.0'>
+    <dhcp>
+      <range start='192.168.30.50' end='192.168.30.200'/>
+    </dhcp>
+  </ip>
+</network>" > br10.xml
+
+doas virsh net-define br10.xml &&
+doas virsh net-start br10 &&
+doas virsh net-autostart br10
+
+sleep 1 && rm br10.xml
+
+echo ----END----

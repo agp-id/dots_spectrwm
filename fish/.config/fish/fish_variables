@@ -1,0 +1,27 @@
+# This file contains fish universal variable definitions.
+# VERSION: 3.0
+SETUVAR --export BROWSER:firefox
+SETUVAR --export EDITOR:nvim
+SETUVAR --export GTK2_RC_FILES:/home/agp/\x2econfig/gtk\x2d2\x2e0/gtkrc\x2d2\x2e0
+SETUVAR --export MOZ_USE_XINPUT2:1
+SETUVAR --export QT_QPA_PLATFORMTHEME:gtk3
+SETUVAR --export READER:subl3
+SETUVAR --export SXHKD_SHELL:/usr/bin/sh
+SETUVAR --export TDESKTOP_I_KNOW_ABOUT_GTK_INCOMPATIBILITY:1
+SETUVAR --export TERMINAL:st
+SETUVAR --export XDG_CACHE_HOME:/home/agp/\x2ecache
+SETUVAR --export XDG_CONFIG_HOME:/home/agp/\x2econfig
+SETUVAR --export XDG_DATA_HOME:/home/agp/\x2elocal/share
+SETUVAR __fish_initialized:3100
+SETUVAR fish_color_cancel:\x2dr
+SETUVAR fish_color_cwd:green
+SETUVAR fish_color_cwd_root:red
+SETUVAR fish_color_history_current:\x2d\x2dbold
+SETUVAR fish_color_host:normal
+SETUVAR fish_color_host_remote:yellow
+SETUVAR fish_color_status:red
+SETUVAR fish_color_user:brgreen
+SETUVAR fish_color_valid_path:\x2d\x2dunderline
+SETUVAR fish_greeting:\x1d
+SETUVAR fish_key_bindings:fish_default_key_bindings
+SETUVAR fish_user_paths:/home/agp/\x2elocal/bin

@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+#buka ncmpcpp di st
+[ pgrep mpd ] || mpd &
+killall ncmpcpp &
+sleep 1 && st -c "ncmpcpp" -e ncmpcpp

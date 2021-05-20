@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+# Update manual ntp ( runit )
+command -v runit > /dev/null && {
+  doas rsm stop ntpd
+  doas ntpd -gq
+}

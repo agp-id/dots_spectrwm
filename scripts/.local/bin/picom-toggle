@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+if pgrep -x "picom" > /dev/null
+then
+	killall picom
+elif
+	pgrep -x "compton" > /dev/null
+then
+	killall compton
+else
+	picom -b --config ~/.config/picom/picom.conf ||compton -b --config ~/.config/picom/compton.conf
+fi

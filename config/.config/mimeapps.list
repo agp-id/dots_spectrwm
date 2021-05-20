@@ -1,0 +1,4 @@
+[Added Associations]
+application/x-shellscript=nvim.desktop;
+text/plain=nvim.desktop;
+application/xml=nvim.desktop;

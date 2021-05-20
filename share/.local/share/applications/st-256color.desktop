@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=st-256color
+Exec=st
+Icon=terminal
